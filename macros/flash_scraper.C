@@ -45,7 +45,7 @@ void flash_scraper(const char* input_file, const char* output_file) {
 
     TTreeReaderArray<double> flash_time(reader, "flash_time");
     TTreeReaderArray<double> flash_total_pe(reader, "flash_total_pe");
-    TTreeReaderArray<double> flash_hlt_gate(reader, "frame_hlt_gate");
+    TTreeReaderValue<double> flash_hlt_gate(reader, "frame_hlt_gate");
 
     while (reader.Next()) {
            
@@ -55,7 +55,7 @@ void flash_scraper(const char* input_file, const char* output_file) {
         for (int i = 0; i < nflashes; ++i) {
 
           flash_tree->Fill(*run, *subrun, *evt, 
-            flash_id[i], flash_time[i], flash_total_pe[i], flash_hlt_gate[i]);             
+            flash_id[i], flash_time[i], flash_total_pe[i], *flash_hlt_gate);             
         
         }
 
